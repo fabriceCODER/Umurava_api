@@ -1,3 +1,5 @@
-export const logger = (message: string) => {
+const logger = (message) => {
     console.log(`[LOG]: ${message}`);
 };
+
+module.exports = logger;

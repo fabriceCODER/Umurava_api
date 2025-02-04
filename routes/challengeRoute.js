@@ -1,12 +1,12 @@
-import { Router } from "express";
-import  ChallengeController  from "@/controllers/challengeController";
+const express = require("express");
+const ChallengeController = require("../controllers/challengeController");
 
-const router = Router();
+const router = express.Router();
 
-router.post("/", ChallengeController.create);
 router.get("/", ChallengeController.getAll);
+router.post("/", ChallengeController.create);
 router.get("/:id", ChallengeController.getById);
 router.put("/:id", ChallengeController.update);
 router.delete("/:id", ChallengeController.delete);
 
-export default router;
+module.exports = router;

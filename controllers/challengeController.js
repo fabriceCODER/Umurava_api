@@ -1,5 +1,4 @@
-const { Request, Response } = require("express");
-const ChallengeService = require("@/services/challengeService");
+const ChallengeService = require("../services/challengeService");
 
 const ChallengeController = {
     async create(req, res) {
@@ -13,7 +12,15 @@ const ChallengeController = {
 
     async getAll(req, res) {
         try {
-            const challenges = await ChallengeService.getAllChallenges();
+            const filters = {
+                search: req.query.search || "",
+                sortBy: req.query.sortBy || "createdAt",
+                order: req.query.order || "desc",
+                page: req.query.page || 1,
+                limit: req.query.limit || 10,
+            };
+
+            const challenges = await ChallengeService.getAllChallenges(filters);
             res.status(200).json(challenges);
         } catch (error) {
             res.status(500).json({ message: "Error fetching challenges", error });
